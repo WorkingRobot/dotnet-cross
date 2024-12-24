@@ -19,6 +19,14 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  packages: write
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+
 jobs:
   build:
     name: Build application
