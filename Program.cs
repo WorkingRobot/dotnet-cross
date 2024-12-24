@@ -38,7 +38,7 @@ if (Environment.Version.Major >= 8 && (currentRID == rid || IsItMusl(rid, os) ==
 }
 if (!isLinux)
     return Die("Only Build for Linux is supported.");
-const string sdkVersion = "8.0";
+const string sdkVersion = "9.0";
 var imageMusl = new Image("musl", $"mcr.microsoft.com/dotnet/sdk:{sdkVersion}-alpine", "apk add clang build-base zlib-dev docker-cli");
 var imageGlibc = new Image("glibc", $"mcr.microsoft.com/dotnet/sdk:{sdkVersion}-jammy",
         "apt-get update && apt-get install -y clang zlib1g-dev curl gnupg",
