@@ -61,11 +61,17 @@ jobs:
           mkdir publish
           cp bin/Release/dotnet-cross.$VERSION.nupkg publish/
           cp bin/Release/dotnet-cross.$VERSION.snupkg publish/
-      - name: Publish package to nuget.org
-        run: dotnet nuget push bin/Release/dotnet-cross.$VERSION.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_AUTH_TOKEN }}
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: publish/*
+
+      - name: Upload to GPR
+        if: startsWith(github.ref, 'refs/tags/')
+        run: dotnet nuget push bin/Release/*.nupkg -s https://nuget.pkg.github.com/${{ github.repository_owner }} -k ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Upload to NuGet
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: dotnet nuget push bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+
