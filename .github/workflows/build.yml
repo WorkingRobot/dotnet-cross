@@ -28,7 +28,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "9.0.x"
       - run: dotnet build dotnet-cross.csproj
         name: Build
   deploy:
@@ -43,7 +43,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "9.0.x"
       - run: |
           echo "Github ref is: $GITHUB_REF"
           if [[ "$GITHUB_REF" =~ ^refs\/tags\/([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+(\-[[:alpha:]])?)$ ]]; then
